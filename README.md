@@ -4,6 +4,8 @@ This repository contains a simple example of CIP? on-chain communication.
 
 ### Usage
 
+### Installation
+
 :bulb: Before starting, make sure you have a synced instance of [cardano-db-sync](https://github.com/input-output-hk/cardano-db-sync) running.
 
 First install the script dependency.
@@ -19,7 +21,13 @@ Done in 0.20s.
 
 ```
 
-To fetch the related metadata communication labeld as `1990` and therefore the "message
+### Message formating
+
+The content of the message needs to be split into chunks of 64 bytes strings, as in the [chunks.js](./chunks.js) example.
+
+### Proof of concept: Message board communication
+
+We are providing an example to fetch the related metadata communication labeled as `1990` and therefore the "message
 board communication" related to the pool id `26b17b78de4f035dc0bfce60d1d3c3a8085c38dcce5fb8767e518bed`.
 
 ```

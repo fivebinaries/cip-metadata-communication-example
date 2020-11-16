@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts":{
-    "main": "node ./index.js"
+    "1990": "node ./1990.js",
+    "chunks": "node ./chunks.js"
   },
   "license": "MIT",
   "dependencies": {
