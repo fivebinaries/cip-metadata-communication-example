@@ -3,7 +3,6 @@ const { Pool } = require('pg')
 const stakeAddress = process.argv.slice(2)[0];
 const stakePoolId = process.argv.slice(2)[1];
 
-
 const addressQuery = `
   SELECT JSON
   FROM tx_metadata txm
@@ -49,7 +48,7 @@ if (!!stakePoolId) {
 // Define PostgreSQL connection to your cardano-db-sync instance
 const pool = new Pool({
   user: 'csyncdb',
-  host: 'dbsync1.testnet.core.blockfrost.io',
+  host: 'host',
   database: 'csyncdb',
   port: 5432,
 })
