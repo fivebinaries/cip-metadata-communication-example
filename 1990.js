@@ -3,23 +3,31 @@ const { Pool } = require('pg')
 const stakePoolId = process.argv.slice(2)[0];
 
 const query = `
-SELECT json
-FROM tx_metadata txm
-JOIN tx_in txi ON (txm.tx_id = txi.tx_in_id)
-JOIN tx_out txo ON (txi.tx_out_id = txo.tx_id)
-WHERE txo.stake_address_id IN
-    (SELECT id
-     FROM stake_address sa
-     WHERE (RIGHT(sa.hash_raw::VARCHAR, LENGTH(sa.hash_raw::VARCHAR)-4)) IN
-         (SELECT encode(po.hash, 'hex')
-          FROM pool_owner po
-          JOIN pool_hash ph ON (po.pool_hash_id = ph.id)
-          WHERE registered_tx_id =
-              (SELECT MAX(registered_tx_id)
-               FROM pool_owner po
-               JOIN pool_hash ph ON (po.pool_hash_id = ph.id)
-               WHERE encode(hash_raw, 'hex') = '${stakePoolId}')))
-  AND txm.key = 1990;`
+  SELECT json
+  FROM tx_metadata txm
+  JOIN tx_out txo ON (txm.tx_id = txo.tx_id)
+  WHERE txo.stake_address_id IN
+    (
+    SELECT id
+    FROM stake_address sa
+    WHERE (RIGHT(sa.hash_raw::VARCHAR, LENGTH(sa.hash_raw::VARCHAR)-4)) IN
+      (
+      SELECT encode(po.hash, 'hex')
+      FROM pool_owner po
+      JOIN pool_hash ph ON (po.pool_hash_id = ph.id)
+      WHERE registered_tx_id =
+        (
+        SELECT MAX(registered_tx_id)
+        FROM pool_owner po
+        JOIN pool_hash ph ON (po.pool_hash_id = ph.id)
+        WHERE encode(hash_raw, 'hex') = '${stakePoolId}'
+        )
+      )
+    )
+  AND txm.key = 1990
+  ORDER BY txm.id DESC;
+`
+
 
 // Define PostgreSQL connection to your cardano-db-sync instance
 const pool = new Pool({
