@@ -4,6 +4,7 @@
   "main": "index.js",
   "scripts":{
     "1990": "node ./1990.js",
+    "1991": "node ./1991.js",
     "chunks": "node ./chunks.js"
   },
   "license": "MIT",

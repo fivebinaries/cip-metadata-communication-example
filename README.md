@@ -44,3 +44,46 @@ LINK:  https://example.com/blog.html
 
 Done in 0.29s.
 ```
+
+### Proof of concept: Direct communications
+
+In this case, we want to list the direction communication to the stake address. 
+
+```
+$ yarn run 1991 stake_test1uqdh4jvf25ukt3p6h6qqem9qnavl782xsnufpsl93wjxsecsr6wwl 
+yarn run v1.22.5
+
+Fetching metadata for address stake_test1uqdh4jvf25ukt3p6h6qqem9qnavl782xsnufpsl93wjxsecsr6wwl
+
+TITLE: Let me tell you what is Cardano.
+BODY:  Cardano is built by a decentralized community of scientists, engineers, and thought leaders united in a common purpose: to create a technology platform that will ignite the positive change the world needs. We believe the future should not be defined by the past, and that more is possible and, through technology, can be made possible for all. We measure the worth of a task not by its challenge, but by its results. Every ada holder also holds a stake in the Cardano network. Ada stored in a wallet can be delegated to a stake pool to earn rewards to participate in the successful running of the network or pledged to a stake pool to increase the pools likelihood of receiving rewards. In time, ada will also be usable for a variety of applications and services on the Cardano platform.
+LINK:  https://cardano.org/
+
+	 ~~ 
+
+TITLE: This is a DM.
+BODY:  This is a direct message, not from pool, but from buddies.
+LINK:  https://cardano.org/
+
+	 ~~ 
+
+Done in 0.28s.
+```
+
+We can also filter these messages based on the stake pool it as come from.
+
+
+```
+$ yarn run 1991 stake_test1uqdh4jvf25ukt3p6h6qqem9qnavl782xsnufpsl93wjxsecsr6wwl 26b17b78de4f035dc0bfce60d1d3c3a8085c38dcce5fb8767e518bed
+yarn run v1.22.5
+Fetching metadata for address stake_test1uqdh4jvf25ukt3p6h6qqem9qnavl782xsnufpsl93wjxsecsr6wwl
+
+
+TITLE: Let me tell you what is Cardano.
+BODY:  Cardano is built by a decentralized community of scientists, engineers, and thought leaders united in a common purpose: to create a technology platform that will ignite the positive change the world needs. We believe the future should not be defined by the past, and that more is possible and, through technology, can be made possible for all. We measure the worth of a task not by its challenge, but by its results. Every ada holder also holds a stake in the Cardano network. Ada stored in a wallet can be delegated to a stake pool to earn rewards to participate in the successful running of the network or pledged to a stake pool to increase the pools likelihood of receiving rewards. In time, ada will also be usable for a variety of applications and services on the Cardano platform.
+LINK:  https://cardano.org/
+
+	 ~~ 
+
+Done in 0.37s.
+```
