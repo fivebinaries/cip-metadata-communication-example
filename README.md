@@ -8,7 +8,7 @@ This repository contains a simple example of CIP? on-chain communication.
 
 :bulb: Before starting, make sure you have a synced instance of [cardano-db-sync](https://github.com/input-output-hk/cardano-db-sync) running.
 
-First install the script dependency.
+First, install the script dependency.
 
 ```bash
 $ yarn
@@ -21,13 +21,13 @@ Done in 0.20s.
 
 ```
 
-### Message formating
+### Message formatting
 
 The content of the message needs to be split into chunks of 64 bytes strings, as in the [chunks.js](./chunks.js) example.
 
 ### Proof of concept: Message board communication
 
-We are providing an example to fetch the related metadata communication labeled as `1990` and therefore the "message
+We are providing an example to fetch the related metadata communication labelled as `1990` and therefore the "message
 board communication" related to the pool id `26b17b78de4f035dc0bfce60d1d3c3a8085c38dcce5fb8767e518bed`.
 
 ```
@@ -45,12 +45,12 @@ LINK:  https://example.com/blog.html
 Done in 0.29s.
 ```
 
-### Proof of concept: Direct communications
+### Proof of concept: Direct communication
 
-In this case, we want to list the direction communication to the stake address. 
+In this case, we want to list the direct communication to the stake address.
 
 ```
-$ yarn run 1991 stake_test1uqdh4jvf25ukt3p6h6qqem9qnavl782xsnufpsl93wjxsecsr6wwl 
+$ yarn run 1991 stake_test1uqdh4jvf25ukt3p6h6qqem9qnavl782xsnufpsl93wjxsecsr6wwl
 yarn run v1.22.5
 
 Fetching metadata for address stake_test1uqdh4jvf25ukt3p6h6qqem9qnavl782xsnufpsl93wjxsecsr6wwl
@@ -70,7 +70,7 @@ LINK:  https://cardano.org/
 Done in 0.28s.
 ```
 
-We can also filter these messages based on the stake pool it as come from.
+We can also filter these messages based on the stake pool it has come from.
 
 
 ```
