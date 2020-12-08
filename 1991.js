@@ -1,17 +1,17 @@
-const { Pool } = require('pg')
+const { Pool } = require("pg");
 
 const stakeAddress = process.argv.slice(2)[0];
 const stakePoolId = process.argv.slice(2)[1];
 
 const addressQuery = `
-  SELECT JSON
+  SELECT json
   FROM tx_metadata txm
   JOIN tx_out txo ON (txm.tx_id = txo.tx_id)
   JOIN stake_address sa ON (txo.stake_address_id = sa.id)
   WHERE sa.view='${stakeAddress}'
-  AND key = 1991
+  AND txm.key = 1991
   ORDER BY txm.id DESC;
-`
+`;
 
 const stakeQuery = `
   SELECT json
@@ -38,7 +38,7 @@ const stakeQuery = `
           SELECT MAX(registered_tx_id)
           FROM pool_owner po
           JOIN pool_hash ph ON (po.pool_hash_id = ph.id)
-          WHERE encode(hash_raw,'hex') = '${stakePoolId}'
+          WHERE view = '${stakePoolId}'
           )
         )
       )
@@ -46,7 +46,7 @@ const stakeQuery = `
     )
   AND sa.view = '${stakeAddress}'
   ORDER BY tx.id DESC;
-`
+`;
 
 if (!!stakePoolId) {
   var query = stakeQuery;
@@ -56,24 +56,23 @@ if (!!stakePoolId) {
 
 // Define PostgreSQL connection to your cardano-db-sync instance
 const pool = new Pool({
-  user: 'csyncdb',
-  host: 'host',
-  database: 'csyncdb',
+  user: "csyncdb",
+  host: "localhost",
+  database: "csyncdb",
   port: 5432,
-})
+});
 
 pool.query(query, (err, res) => {
   const result = res.rows;
   console.log("Fetching metadata for address " + stakeAddress + "\n");
-  for(var i = 0; i < result.length; i++) {
+  for (var i = 0; i < result.length; i++) {
     var obj = result[i];
 
-    console.log("TITLE: " + obj['json']['title']);
-    var body = obj['json']['content'].join('');
+    console.log("TITLE: " + obj["json"]["title"]);
+    var body = obj["json"]["content"].join("");
     console.log("BODY:  " + body);
-    console.log("LINK:  " + obj['json']['link']);
-    console.log("\n\t ~~ \n")
-
-}
-  pool.end()
-})
+    console.log("LINK:  " + obj["json"]["link"]);
+    console.log("\n\t ~~ \n");
+  }
+  pool.end();
+});
